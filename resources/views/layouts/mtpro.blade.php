@@ -45,6 +45,10 @@
         {{-- Left Sidebar - style you can find in sidebar.scss  --}}
         @leftSidebar
         {{-- End Left Sidebar - style you can find in sidebar.scss  --}}
+
+        {{-- Sweet Alert --}}
+        @include('sweetalert::alert')
+        {{-- Sweet Alert --}}
         {{-- Page wrapper  --}}
         <div class="page-wrapper">
             {{-- Container fluid  --}}
