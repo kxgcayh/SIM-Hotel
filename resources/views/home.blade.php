@@ -1,6 +1,17 @@
 @extends('layouts.mtpro', (['title' => 'Home']))
 
 @section('content')
+
+{{-- Bread crumb and right sidebar toggle --}}
+<x-bread-crumb title="Dashboard">
+    <x-bc-item field="Home" />
+    <x-bc-item-active field="Dashboard" />
+    <x-slot name="button">
+
+    </x-slot>
+</x-bread-crumb>
+{{-- End Bread crumb and right sidebar toggle --}}
+
 <x-card-content title="Welcome Home">
     @if (session('status'))
     <div class="alert alert-success" role="alert">
