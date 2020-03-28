@@ -41,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::include('includes.preloader', 'preloader');
         Blade::include('includes.right-sidebar', 'rightSidebar');
         Blade::include('includes.service-panel', 'servicePanel');
+        Blade::include('includes.footer-script', 'footerScript');
+        Blade::include('includes.header-script', 'headerScript');
     }
 }
