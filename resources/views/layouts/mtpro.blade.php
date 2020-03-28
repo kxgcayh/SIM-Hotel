@@ -20,6 +20,9 @@
         rel="stylesheet">
     {{-- This page css - Morris CSS --}}
     <link href="{{ asset('plugins/c3-master/c3.min.css') }}" rel="stylesheet">
+    {{-- Font --}}
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     {{-- Custom CSS --}}
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     {{-- You can change the theme colors from here --}}
@@ -48,7 +51,8 @@
 
         {{-- Sweet Alert --}}
         @include('sweetalert::alert')
-        {{-- Sweet Alert --}}
+        {{-- End of Sweet Alert --}}
+
         {{-- Page wrapper  --}}
         <div class="page-wrapper">
             {{-- Container fluid  --}}
