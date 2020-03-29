@@ -13,9 +13,12 @@
 <script src="{{ asset('plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
 <script src="{{ asset('plugins/sparkline/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+{{-- jQuery for Carousel --}}
+<script src="{{ asset('plugins/owl.carousel/owl.carousel.min.js') }}"></script>
 {{-- Custom JavaScript --}}
 <script src="{{ asset('js/custom.min.js') }}"></script>
 {{-- This page plugins --}}
+
 {{-- chartist chart --}}
 <script src="{{ asset('plugins/chartist-js/dist/chartist.min.js') }}"></script>
 <script src="{{ asset('plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
