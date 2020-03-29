@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\Room;
 use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
@@ -15,4 +17,14 @@ class Hotel extends Model
     ];
 
     public $timestamps = false;
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

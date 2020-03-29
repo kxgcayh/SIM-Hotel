@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\City;
 use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
@@ -15,4 +16,9 @@ class Province extends Model
     ];
 
     public $timestamps = false;
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }

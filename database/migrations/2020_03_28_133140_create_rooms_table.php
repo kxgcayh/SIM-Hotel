@@ -17,8 +17,14 @@ class CreateRoomsTable extends Migration
             $table->bigIncrements('id_room');
             $table->foreignId('hotel_id');
             $table->foreign('hotel_id')->references('id_hotel')
-                ->on('tr_hotels')->onDelete('cascade');
+                ->on('tr_hotels')->onDelete('cascade');            
             $table->string('name');
+            $table->bigInteger('price');
+            $table->integer('bedroom');
+            $table->integer('bathroom');
+            $table->boolean('wifi')->nullable();
+            $table->boolean('launch')->nullable();
+            $table->boolean('dinner')->nullable();
         });
     }
 
