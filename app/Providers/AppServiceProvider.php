@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\View\Components\Button;
 use App\View\Components\BcItem;
 use App\View\Components\BreadCrumb;
 use App\View\Components\CardContent;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Components
+        Blade::component('button', Button::class);
         Blade::component('card-content', CardContent::class);
         Blade::component('bread-crumb', BreadCrumb::class);
         Blade::component('bc-item', BcItem::class);
