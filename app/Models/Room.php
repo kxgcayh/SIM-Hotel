@@ -13,4 +13,6 @@ class Room extends Model
     protected $fillable = [
         'hotel_id', 'name',
     ];
+
+    public $timestamps = false;
 }

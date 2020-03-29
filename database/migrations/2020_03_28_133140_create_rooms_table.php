@@ -19,7 +19,6 @@ class CreateRoomsTable extends Migration
             $table->foreign('hotel_id')->references('id_hotel')
                 ->on('tr_hotels')->onDelete('cascade');
             $table->string('name');
-            $table->timestamps();
         });
     }
 

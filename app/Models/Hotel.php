@@ -13,4 +13,6 @@ class Hotel extends Model
     protected $fillable = [
         'city_id', 'name',
     ];
+
+    public $timestamps = false;
 }
