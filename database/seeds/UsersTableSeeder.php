@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@hotel.com',
             'password' => bcrypt('password'),
             'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
         ]);
     }
 }
