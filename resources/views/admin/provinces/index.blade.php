@@ -1,4 +1,4 @@
-@extends('layouts.mtpro', (['title' => 'Home']))
+@extends('layouts.mtpro', (['title' => 'Province List']))
 
 @section('content')
 
@@ -7,9 +7,7 @@
     <x-bc-item field="Home" />
     <x-bc-item-active field="Dashboard" />
     <x-slot name="button">
-        {{-- How to Create Button
         <x-button type="primary" field="Create" />
-        Uncoment this --}}
     </x-slot>
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
