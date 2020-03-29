@@ -16,8 +16,6 @@ class Hotel extends Model
         'city_id', 'name',
     ];
 
-    public $timestamps = false;
-
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id');

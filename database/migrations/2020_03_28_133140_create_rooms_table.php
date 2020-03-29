@@ -25,6 +25,7 @@ class CreateRoomsTable extends Migration
             $table->boolean('wifi')->nullable();
             $table->boolean('launch')->nullable();
             $table->boolean('dinner')->nullable();
+            $table->timestamps();
         });
     }
 

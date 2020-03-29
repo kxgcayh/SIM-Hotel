@@ -20,6 +20,7 @@ class CreateHotelsTable extends Migration
                 ->on('tr_cities')->onDelete('cascade');            
             $table->string('name');
             $table->string('address');
+            $table->timestamps();
         });
     }
 

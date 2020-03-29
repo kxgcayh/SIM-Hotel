@@ -15,8 +15,6 @@ class Province extends Model
         'name',
     ];
 
-    public $timestamps = false;
-
     public function cities()
     {
         return $this->hasMany(City::class);

@@ -16,8 +16,6 @@ class Room extends Model
         'hotel_id', 'name',
     ];
 
-    public $timestamps = false;
-
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'hotel_id');
