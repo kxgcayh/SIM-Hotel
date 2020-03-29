@@ -21,6 +21,7 @@ class CreateReservationsTable extends Migration
             $table->foreignId('booked_by');
             $table->foreign('booked_by')->references('id_user')
                 ->on('ms_users')->onDelete('cascade');
+            $table->integer('total_night');
             $table->timestamps();
         });
     }
