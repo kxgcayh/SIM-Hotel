@@ -12,5 +12,12 @@
 */
 
 Route::prefix('admin')->name('admin.')->group(function () {    
-    // 
+    Route::resource('cities', 'CityController');
+    Route::resource('hotels', 'HotelController');
+    Route::resource('levels', 'LevelController');
+    Route::resource('provinces', 'ProvinceController');        
+});
+
+Route::name('admin.')->group(function () {    
+    Route::resource('rooms', 'RoomController');
 });
