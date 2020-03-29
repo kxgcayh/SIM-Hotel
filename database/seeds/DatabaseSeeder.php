@@ -10,9 +10,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $this->call(LevelsTableSeeder::class);
-        $this->call(AccessTableSeeder::class);
+    {        
         $this->call(UsersTableSeeder::class);
+        $this->call(LevelsAndAccessSeeder::class);
     }
 }
