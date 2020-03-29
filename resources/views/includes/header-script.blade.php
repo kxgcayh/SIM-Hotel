@@ -3,6 +3,9 @@
 <title>{{ $title }}</title>
 {{-- Bootstrap Core CSS --}}
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+{{-- owl slider CSS --}}
+<link href="{{ asset('plugins/owl.carousel/owl.carousel.min.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/owl.carousel/owl.theme.default.css') }}" rel="stylesheet">
 {{-- chartist CSS --}}
 <link href="{{ asset('plugins/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
 <link href="{{ asset('plugins/chartist-js/dist/chartist-init.css') }}" rel="stylesheet">
