@@ -23,10 +23,13 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($provinces as $province)
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>{{ ++$no }}</td>
+                    <td>{{ $province->name }}</td>
                 </tr>
+                @endforeach
             </tbody>
+        </table>
 </x-card-content>
 @endsection
