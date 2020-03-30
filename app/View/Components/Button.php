@@ -11,8 +11,7 @@ class Button extends Component
      *
      * @var string
      */
-    public $type;
-    public $field;
+    public $type, $field;
 
     /**
      * Create a new component instance.

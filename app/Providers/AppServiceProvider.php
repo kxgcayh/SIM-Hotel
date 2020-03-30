@@ -7,6 +7,8 @@ use App\View\Components\BcItem;
 use App\View\Components\BreadCrumb;
 use App\View\Components\CardContent;
 use App\View\Components\BcItemActive;
+use App\View\Components\Modal;
+use App\View\Components\ModalButton;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
         // Components
         Blade::component('button', Button::class);
         Blade::component('card-content', CardContent::class);
+        Blade::component('modal', Modal::class);
+        Blade::component('modal-button', ModalButton::class);
         Blade::component('bread-crumb', BreadCrumb::class);
         Blade::component('bc-item', BcItem::class);
         Blade::component('bc-item-active', BcItemActive::class);
