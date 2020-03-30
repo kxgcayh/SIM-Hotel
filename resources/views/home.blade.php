@@ -14,7 +14,7 @@
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
 
-<x-card-content title="Welcome Home">
-    <p>Hello, <b>{{ Auth::user()->name }}</b>.<br>What you want to do right now?</p>
+<x-card-content title="Welcome Home" subtitle="This is a dashboard page">
+    {{-- <p>Hello, <b>{{ Auth::user()->name }}</b>.<br>What you want to do right now?</p> --}}
 </x-card-content>
 @endsection

@@ -16,7 +16,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('hotels', 'HotelController')->except('create');
     Route::resource('levels', 'LevelController');
     Route::resource('provinces', 'ProvinceController')
-        ->except('create');
+        ->except(['create', 'show']);
     Route::resource('rooms', 'RoomController');
 });
 

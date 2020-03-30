@@ -36,12 +36,7 @@ class ProvinceController extends Controller
 
         Alert::alert()->success('Succes', 'Province Data Successfully Created');
         return redirect()->route('admin.provinces.index');
-    }
-    
-    public function show($id)
-    {
-        //
-    }
+    }    
     
     public function edit(Province $province)
     {
@@ -62,9 +57,9 @@ class ProvinceController extends Controller
         return redirect()->route('admin.provinces.index');
     }
     
-    public function destroy($id)
+    public function destroy($id_province)
     {
-        $province = Province::findOrFail($id);
+        $province = Province::findOrFail($id_province);
         $province->delete();
 
         Alert::toast('Data Province Deleted Successfully', 'info');
