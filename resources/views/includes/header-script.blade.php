@@ -16,3 +16,8 @@
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 {{-- You can change the theme colors from here --}}
 <link href="{{ asset('css/colors/red.css') }}" id="theme" rel="stylesheet">
+
+{{-- DataTables --}}
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/datatables/css/dataTables.bootstrap4.css')}}">
+<link rel="stylesheet" type="text/css"
+    href="{{asset('plugins/datatables/responsive/css/responsive.dataTables.min.css')}}">

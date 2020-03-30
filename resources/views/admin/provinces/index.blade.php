@@ -3,9 +3,10 @@
 @section('content')
 
 {{-- Bread crumb and right sidebar toggle --}}
-<x-bread-crumb title="Dashboard">
+<x-bread-crumb title="Data Provinces">
     <x-bc-item field="Home" />
-    <x-bc-item-active field="Dashboard" />
+    <x-bc-item field="Data Location" />
+    <x-bc-item-active field="Provinces" />
     <x-slot name="button">
         <x-button type="primary" field="Create" />
     </x-slot>
@@ -14,12 +15,13 @@
 
 <x-card-content title="Province List">
     <div class="table-responsive m-t-40">
-        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
             width="100%">
             <thead>
                 <tr>
-                    <td>No.</td>
-                    <td>Province Name</td>
+                    <th width="5%">No.</th>
+                    <th width="50%">Province Name</th>
+                    <th width=" 45%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +29,10 @@
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $province->name }}</td>
+                    <td>
+                        <x-button type="warning" field="Edit" />
+                        <x-button type="danger" field="Delete" />
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
