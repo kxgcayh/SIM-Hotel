@@ -43,8 +43,9 @@
                         <form action="{{ route('admin.provinces.destroy', $province->id_province) }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <a href="{{ route('admin.provinces.edit', $province->id_province) }}"
-                                class="btn btn-warning">Edit</a>
+                            <x-a-button class="warning" :href="route('admin.provinces.edit', $province->slug )">
+                                Edit
+                            </x-a-button>
                             <x-button type="danger" field="Delete" />
                         </form>
                     </td>

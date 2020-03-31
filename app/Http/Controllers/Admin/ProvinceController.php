@@ -38,12 +38,13 @@ class ProvinceController extends Controller
         return redirect()->route('admin.provinces.index');
     }    
     
-    public function edit(Province $province)
+    public function edit($slug)
     {
+        $province = Province::where('slug', $slug)->firstOrFail();
         return view('admin.provinces.edit', compact('province'));
     }
     
-    public function update(Request $request, Province $province)
+    public function update(Request $request, $id_province)
     {
         $request->validate([
             'name' => 'required',            
@@ -51,7 +52,9 @@ class ProvinceController extends Controller
             'name.required' => 'Province name is required'
         ]);
 
-        $province->update($request->all());
+        $province = Province::findOrFail($id_province);
+        $province->name = $request->name;
+        $province->save();
 
         Alert::info('Update Data Success', 'Data Province Updated Succssfully.');
         return redirect()->route('admin.provinces.index');
