@@ -19,6 +19,7 @@ class CreateCitiesTable extends Migration
             $table->foreign('province_id')->references('id_province')
                 ->on('ms_provinces')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }

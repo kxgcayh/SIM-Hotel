@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CityController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{    
+    function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     public function index()
     {
-        //
+        $cities = City::with('province')->latest()->paginate(5);
+        return view('admin.cities.index', compact('cities'))
+            ->with('no', (request()->input('page', 1) - 1) * 5);    
     }
 
     /**

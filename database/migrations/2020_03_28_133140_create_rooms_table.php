@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->foreign('hotel_id')->references('id_hotel')
                 ->on('tr_hotels')->onDelete('cascade');            
             $table->string('name');
+            $table->string('slug');
             $table->bigInteger('price');
             $table->integer('bedroom');
             $table->integer('bathroom');
