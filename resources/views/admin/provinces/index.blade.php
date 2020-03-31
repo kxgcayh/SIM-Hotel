@@ -13,8 +13,8 @@
             <form role="form" action="{{ route('admin.provinces.store') }}" method="POST" class="form-material">
                 @csrf
                 <div class="form-group">
-                    <input name="name" type="text" id="id_province"
-                        class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Province Name">
+                    <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
+                        placeholder="Province Name">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -35,12 +35,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($provinces as $province)
+                @forelse ($provinces as $province)
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $province->name }}</td>
                     <td>
-                        <form action="{{ route('admin.provinces.destroy', $province->id_province) }}" method="POST">
+                        <form action="{{ route('admin.provinces.destroy', $province->slug) }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
                             <x-a-button class="warning" :href="route('admin.provinces.edit', $province->slug )">
@@ -50,7 +50,11 @@
                         </form>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="3">Tidak ada Data Provinsi</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
 </x-card-content>

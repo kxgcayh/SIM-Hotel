@@ -32,7 +32,7 @@
     </x-half-card>
     <x-half-card title="Edit Default Data">
         <hr class="mt-0">
-        <form action="{{ route('admin.provinces.update', $province->id_province) }}" class="form-material" method="POST"
+        <form action="{{ route('admin.provinces.update', $province->slug) }}" class="form-material" method="POST"
             role="form">
             @csrf
             @method('PUT')

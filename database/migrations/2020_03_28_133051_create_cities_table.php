@@ -14,6 +14,7 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('tr_cities', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->bigIncrements('id_city');
             $table->foreignId('province_id');
             $table->foreign('province_id')->references('id_province')

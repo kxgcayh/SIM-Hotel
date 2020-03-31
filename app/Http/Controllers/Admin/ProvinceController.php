@@ -44,7 +44,7 @@ class ProvinceController extends Controller
         return view('admin.provinces.edit', compact('province'));
     }
     
-    public function update(Request $request, $id_province)
+    public function update(Request $request, $slug)
     {
         $request->validate([
             'name' => 'required',            
@@ -52,7 +52,7 @@ class ProvinceController extends Controller
             'name.required' => 'Province name is required'
         ]);
 
-        $province = Province::findOrFail($id_province);
+        $province = Province::where('slug', $slug)->firstOrFail();
         $province->name = $request->name;
         $province->save();
 
@@ -60,9 +60,9 @@ class ProvinceController extends Controller
         return redirect()->route('admin.provinces.index');
     }
     
-    public function destroy($id_province)
+    public function destroy($slug)
     {
-        $province = Province::findOrFail($id_province);
+        $province = Province::where('slug', $slug)->firstOrFail();
         $province->delete();
 
         Alert::toast('Data Province Deleted Successfully', 'info');
