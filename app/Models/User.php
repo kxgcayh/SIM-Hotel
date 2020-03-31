@@ -7,18 +7,28 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, Sluggable;
 
     protected $table = 'ms_users';
 
     protected $primaryKey = 'id_user';
     
     protected $fillable = [
-        'name', 'username', 'telp', 'email', 'password',
+        'name', 'slug', 'username', 'telp', 'email', 'password',
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     protected $hidden = [
         'password', 'remember_token',
