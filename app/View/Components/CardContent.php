@@ -12,15 +12,17 @@ class CardContent extends Component
      * @var string
      */
     public $title;
+    public $subtitle;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title)
+    public function __construct($title, $subtitle)
     {
         $this->title = $title;
+        $this->subtitle = $subtitle;
     }
 
     /**

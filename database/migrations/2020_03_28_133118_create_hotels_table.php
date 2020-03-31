@@ -17,8 +17,11 @@ class CreateHotelsTable extends Migration
             $table->bigIncrements('id_hotel');
             $table->foreignId('city_id');
             $table->foreign('city_id')->references('id_city')
-                ->on('tr_cities')->onDelete('cascade');
+                ->on('tr_cities')->onDelete('cascade');            
             $table->string('name');
+            $table->string('slug');
+            $table->string('address');
+            $table->timestamps();
         });
     }
 

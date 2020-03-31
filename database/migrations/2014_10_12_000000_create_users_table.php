@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ class CreateUsersTable extends Migration
         Schema::create('ms_users', function (Blueprint $table) {
             $table->bigIncrements('id_user');
             $table->string('name');
+            $table->string('slug');
             $table->string('username')->unique();
             $table->string('telp')->unique();
             $table->string('email')->unique();

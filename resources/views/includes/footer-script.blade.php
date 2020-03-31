@@ -29,3 +29,10 @@
 <script src="{{ asset('js/dashboard1.js') }}"></script>
 {{-- Style switcher --}}
 <script src="{{ asset('plugins/styleswitcher/jQuery.style.switcher.js') }}"></script>
+
+{{-- DataTables --}}
+<script src="{{asset('plugins/datatables/datatables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables/responsive/js/dataTables.responsive.min.js')}}"></script>
+
+{{-- App Scripts --}}
+@stack('scripts')
