@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('rooms', 'RoomController')->only(['index', 'show']);
+Route::resource('reservations', 'ReservationController');

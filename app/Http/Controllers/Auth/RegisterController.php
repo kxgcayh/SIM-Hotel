@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'username' => $data['username'],
             'telp' => $data['telp'],
-              'email' => $data['email'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }

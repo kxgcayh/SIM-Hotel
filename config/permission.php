@@ -36,7 +36,7 @@ return [
          * default value but you may easily change it to any table you like.
          */
 
-        'roles' => 'ms_level',
+        'roles' => 'ms_levels',
 
         /*
          * When using the "HasPermissions" trait from this package, we need to know which
@@ -81,7 +81,7 @@ return [
          * that case, name this `model_uuid`.
          */
 
-        'model_morph_key' => 'model_uuid',
+        'model_morph_key' => 'model_id',
     ],
 
     /*

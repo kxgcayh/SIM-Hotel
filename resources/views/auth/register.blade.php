@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth', (['title' => 'Register']))
 
 @section('content')
 <div class="container">
@@ -99,7 +99,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection
