@@ -3,13 +3,12 @@
 @section('content')
 
 {{-- Bread crumb and right sidebar toggle --}}
-<x-bread-crumb title="Data Cities">
+<x-bread-crumb title="Data Hotels">
     <x-bc-item field="Home" />
-    <x-bc-item field="Data Location" />
-    <x-bc-item-active field="Cities" />
+    <x-bc-item-active field="Hotel List" />
     <x-slot name="button">
         <x-modal-button id="create" class="primary" icon="mdi mdi-plus" name="Create" />
-        <x-modal id="create" class="primary" title="Create City Data">
+        <x-modal id="create" class="primary" title="Create Hotel Data">
             <form role="form" action="{{ route('admin.hotels.store') }}" method="POST" class="form-material">
                 @csrf
                 <div class="form-group">
@@ -25,7 +24,11 @@
                 </div>
                 <div class="form-group">
                     <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="City Name">
+                        placeholder="Hotel Name">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}" rows=" 5"
+                        name="address" id="address" placeholder="Address"></textarea>
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -34,16 +37,17 @@
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
 
-<x-card-content title="City List" subtitle="Data to Store City List">
+<x-card-content title="Hotel List" subtitle="Data to Hotel City List">
     <div class="table-responsive m-t-40">
         <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
             width="100%">
             <thead>
                 <tr>
                     <th width="5%">No.</th>
-                    <th width="25%">City </th>
-                    <th width="50%">Name Hotel</th>
-                    <th width=" 45%">Action</th>
+                    <th width="10%">City </th>
+                    <th width="10%">Hotel Name</th>
+                    <th width="15%">Address</th>
+                    <th width="10%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,11 +56,12 @@
                     <td>{{ ++$no }}</td>
                     <td>{{ $hotel->city['name'] }}</td>
                     <td>{{ $hotel->name }}</td>
+                    <td>{{ $hotel->address }}</td>
                     <td>
-                        <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
+                        <form action="{{ route('admin.hotels.destroy', $hotel->slug) }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotels->slug )">
+                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotel->slug )">
                                 Edit
                             </x-a-button>
                             <x-button type="danger" field="Delete" />
@@ -65,10 +70,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">Data Hotel is Empty</td>
+                    <td colspan="4" class="text-center">Data Hotel is Empty</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+        {{ $hotels->links() }}
 </x-card-content>
 @endsection
