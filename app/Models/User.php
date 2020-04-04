@@ -16,7 +16,7 @@ class User extends Authenticatable
     protected $table = 'ms_users';
 
     protected $primaryKey = 'id_user';
-    
+
     protected $fillable = [
         'name', 'slug', 'username', 'telp', 'email', 'password',
     ];
@@ -33,7 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
