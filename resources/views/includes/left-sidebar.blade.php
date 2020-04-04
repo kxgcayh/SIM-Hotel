@@ -10,7 +10,7 @@
                 @role('admin')
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false">
-                        <i class="mdi mdi-clipboard-account"></i><span class="hide-menu"> Management Accounts</span>
+                        <i class="mdi mdi-clipboard-account"></i><span class="hide-menu"> Accounts</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ route('admin.users.index') }}"><i class="mdi mdi-account"></i> Data User</a>
@@ -20,7 +20,7 @@
                 </li>
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false">
-                        <i class="mdi mdi-google-maps"></i><span class="hide-menu"> Management Location</span>
+                        <i class="mdi mdi-google-maps"></i><span class="hide-menu"> Locations</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ route('admin.provinces.index') }}"><i class="mdi mdi-map-marker-radius"></i>
@@ -30,10 +30,19 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('admin.hotels.index') }}"><i class="mdi mdi-hotel"></i> Hotel List</a>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="mdi mdi-home-modern"></i><span class="hide-menu"> Data Rooms</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="#"><i class="mdi mdi-clipboard-text"></i> Room
+                                Types</a>
+                        </li>
+                        <li><a href="#"><i class="mdi mdi-playlist-check"></i> Type Facilities</a></li>
+                        <li><a href="{{ route('admin.rooms.index') }}"><i class="mdi mdi-hotel"></i> Room List</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="{{ route('admin.rooms.index') }}"><i class="mdi mdi-home-modern"></i> Room List</a>
+                    <a href="{{ route('admin.hotels.index') }}"><i class="mdi mdi-hotel"></i> Hotel List</a>
                 </li>
                 @else
                 <li>

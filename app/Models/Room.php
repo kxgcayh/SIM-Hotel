@@ -14,9 +14,9 @@ class Room extends Model
     protected $table = 'tr_rooms';
 
     protected $primaryKey = 'id_room';
-    
+
     protected $fillable = [
-        'hotel_id', 'name', 'slug',
+        'hotel_id', 'room_type_id', 'name', 'slug'
     ];
 
     public function sluggable()
@@ -31,6 +31,11 @@ class Room extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'hotel_id');
+    }
+
+    public function roomtype()
+    {
+        return $this->belongsTo(RoomType::class, 'room_type_id');
     }
 
     public function reservations()
