@@ -1,33 +1,35 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
-use DataTables;
+use DB;
+use Hash;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Controllers\Controller;
-
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
     {
-        if ($request->ajax()) {
-            $data = User::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-     
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-      
-        return view('admin.users.index');
+        $this->middleware('verified');
     }
+
+
+    public function index()
+    {
+        $data = User::orderBy('id_user', 'DESC')->paginate(5);
+        return view('admin.users.index', compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,19 +38,29 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::orderBy('name', 'ASC')->get();
+        return view('admin.users.create', compact('roles'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User created successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -58,8 +70,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.users.show', compact('user'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -69,20 +83,40 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+
+        return view('admin.users.edit', compact('user', 'departements', 'roles', 'userRole'));
     }
+
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserStoreRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserStoreRequest $request, $id)
     {
-        //
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = array_except($input, array('password'));
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('tr_model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -92,7 +126,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deleted successfully');
     }
-
 }

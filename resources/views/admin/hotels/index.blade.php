@@ -63,7 +63,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="text-center">Data Hotel is Empty</td>
+                    <td colspan="5" class="text-center">Data Hotel is Empty</td>
                 </tr>
                 @endforelse
             </tbody>

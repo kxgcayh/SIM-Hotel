@@ -8,18 +8,23 @@
     <x-bc-item field="Management Account" />
     <x-bc-item-active field="Users" />
     <x-slot name="button">
-        <x-button type="primary" field="Create" />
+        <x-a-button class="warning" :href="route('admin.users.create')">
+            Create
+        </x-a-button>
     </x-slot>
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
 
 <x-card-content title="List User" subtitle="User has been registered on Application">
     <div class="table-responsive m-t-40">
-        <table class="table table-bordered data-table">
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered text-center"
+            cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Username</th>
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
                     <th width="100px">Action</th>
                 </tr>
@@ -30,37 +35,3 @@
         </table>
 </x-card-content>
 @endsection
-
-@push('scripts')
-<script type="text/javascript">
-    $(function () {
-
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('admin.users.index') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-
-    });
-
-</script>
-@endpush
