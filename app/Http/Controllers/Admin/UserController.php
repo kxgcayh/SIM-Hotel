@@ -6,17 +6,13 @@ namespace App\Http\Controllers\Admin;
 use DB;
 use Hash;
 use App\Models\User;
-use App\Http\Requests\UserStoreRequest;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     function __construct()
     {
         $this->middleware('verified');
@@ -27,28 +23,17 @@ class UserController extends Controller
     {
         $data = User::orderBy('id_user', 'DESC')->paginate(5);
         return view('admin.users.index', compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('no', (request()->input('page', 1) - 1)* 5);
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $roles = Role::orderBy('name', 'ASC')->get();
-        return view('admin.users.create', compact('roles'));
+        $levels = Role::orderBy('name', 'ASC')->get();
+        return view('admin.users.create', compact('levels'));
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\UserStoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(UserStoreRequest $request)
     {
         $input = $request->all();
@@ -62,43 +47,23 @@ class UserController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($id_user)
     {
-        $user = User::find($id);
+        $user = User::find($id_user);
         return view('admin.users.show', compact('user'));
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($id_user)
     {
-        $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
+        $user = User::find($id_user);
+        $roles= Role::orderBy('name', 'ASC')->get();
 
-        return view('admin.users.edit', compact('user', 'departements', 'roles', 'userRole'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\UserStoreRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UserStoreRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id_user)
     {
         $input = $request->all();
         if (!empty($input['password'])) {
@@ -107,9 +72,9 @@ class UserController extends Controller
             $input = array_except($input, array('password'));
         }
 
-        $user = User::find($id);
+        $user = User::find($id_user);
         $user->update($input);
-        DB::table('tr_model_has_roles')->where('model_id', $id)->delete();
+        DB::table('tr_user_has_levels')->where('model_id', $id_user)->delete();
 
         $user->assignRole($request->input('roles'));
 
@@ -118,15 +83,9 @@ class UserController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id_user)
     {
-        User::find($id)->delete();
+        User::find($id_user)->delete();
         return redirect()->route('admin.users.index')
             ->with('success', 'User deleted successfully');
     }

@@ -33,9 +33,10 @@ class LevelsAndAccessSeeder extends Seeder
             ->givePermissionTo([
                 'create', 'read', 'update'
             ]);
-        
+
+        // Assign Admin Level Access to User
+        $admin = User::find(1)->givePermissionTo(Permission::all());
         // Assign Admin Level to User
-        $admin = User::find(1);
         $admin->assignRole([$adminRole->id]);
 
         // Assign Staff Level to User

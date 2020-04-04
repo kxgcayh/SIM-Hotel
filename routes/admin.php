@@ -25,8 +25,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('rooms', 'RoomController')
         ->parameters(['rooms' => 'slug']);
     // User
-    Route::resource('users', 'UserController')
-        ->parameters(['users' => 'slug']);
+    Route::resource('users', 'UserController');
+        // ->parameters(['users' => 'slug']);
 
     // Level
     Route::resource('levels', 'LevelController');
