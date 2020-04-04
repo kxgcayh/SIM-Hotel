@@ -51,7 +51,7 @@
                 <label for="province_id">Province</label>
                 <select name="province_id" id="province_id" required
                     class="form-control {{ $errors->has('province_id') ? 'is-invalid':'' }}">
-                    <option value=""></option>
+                    <option hidden></option>
                     @foreach ($provinces as $province)
                     <option value="{{ $province->id_province }}"
                         {{ $province->id_province == $city->province_id ? 'selected':'' }}>

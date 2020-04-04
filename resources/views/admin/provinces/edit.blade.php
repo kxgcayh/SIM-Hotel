@@ -8,7 +8,9 @@
     <x-bc-item field="Data Location" />
     <x-bc-item field="Provinces" />
     <x-bc-item-active field="Edit" />
-    <x-slot name="button"></x-slot>
+    <x-a-button class="info" :href="route('admin.provinces.index')">
+        Back
+    </x-a-button>
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
 

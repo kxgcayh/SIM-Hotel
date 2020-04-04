@@ -38,6 +38,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name.required' => 'Please input name!',
             'username.required' => 'Please input username!',
+            'telp.required' => 'Please insert phone number!',
             'email.required' => 'Please input email!',
             'password.required' => 'Please check password!',
             'roles.required' => 'Please select level!'

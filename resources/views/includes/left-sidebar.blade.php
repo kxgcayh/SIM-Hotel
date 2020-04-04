@@ -34,10 +34,11 @@
                         <i class="mdi mdi-home-modern"></i><span class="hide-menu"> Data Rooms</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#"><i class="mdi mdi-clipboard-text"></i> Room
+                        <li><a href="{{ route('admin.roomtypes.index') }}"><i class="mdi mdi-clipboard-text"></i> Room
                                 Types</a>
                         </li>
-                        <li><a href="#"><i class="mdi mdi-playlist-check"></i> Type Facilities</a></li>
+                        <li><a href="{{ route('admin.facilities.index') }}"><i class="mdi mdi-playlist-check"></i> Type
+                                Facilities</a></li>
                         <li><a href="{{ route('admin.rooms.index') }}"><i class="mdi mdi-hotel"></i> Room List</a></li>
                     </ul>
                 </li>

@@ -31,6 +31,7 @@ class RoomController extends Controller
         $room->hotel_id = $request->hotel_id;
         $room->room_type_id = $request->room_type_id;
         $room->name = $request->name;
+        $room->price = $request->price;
         $room->save();
 
         Alert::success('Success', 'Data Room Created Succssfully.');
@@ -39,10 +40,10 @@ class RoomController extends Controller
 
     public function edit($slug)
     {
-        $hotel = Hotel::orderBy('name', 'ASC')->get();
-        $type = Type::orderBy('name', 'ASC')->get();
+        $hotels = Hotel::orderBy('name', 'ASC')->get();
+        $types = Type::orderBy('name', 'ASC')->get();
         $room = Room::with('hotel', 'type')->where('slug', $slug)->firstOrFail();
-        return view('admin.rooms.edit', compact('hotel', 'type', 'room'));
+        return view('admin.rooms.edit', compact('hotels', 'types', 'room'));
     }
 
     public function update(RoomStoreRequest $request, $slug)
@@ -51,6 +52,7 @@ class RoomController extends Controller
         $room->hotel_id = $request->hotel_id;
         $room->room_type_id = $request->room_type_id;
         $room->name = $request->name;
+        $room->price = $request->price;
         $room->save();
 
         Alert::success('Success', 'Data Room Updated Succssfully.');
