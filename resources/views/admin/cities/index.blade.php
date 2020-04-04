@@ -14,23 +14,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="province_id">Province</label>
-                    <select name="province_id" id="province_id" required
-                        class="form-control @error('province_id') is-invalid @enderror">
+                    <select name="province_id" id="province_id" required class="form-control">
                         <option value=""></option>
                         @foreach ($provinces as $province)
                         <option value="{{ $province->id_province }}">{{ ucfirst($province->name) }}</option>
                         @endforeach
                     </select>
-                    @error('province_id')
-                    <p class="text-danger">{{ $errors->first('province_id') }}</p>
-                    @enderror
                 </div>
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                        placeholder="City Name">
-                    @error('name')
-                    <p class="text-danger">{{ $errors->first('name') }}</p>
-                    @enderror
+                    <input name="name" type="text" class="form-control" placeholder="City Name">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>

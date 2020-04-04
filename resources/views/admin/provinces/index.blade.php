@@ -13,8 +13,7 @@
             <form role="form" action="{{ route('admin.provinces.store') }}" method="POST" class="form-material">
                 @csrf
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="Province Name">
+                    <input name="name" type="text" class="form-control" placeholder="Province Name">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -25,13 +24,13 @@
 
 <x-card-content title="Province List" subtitle="Data to Store City List">
     <div class="table-responsive m-t-40">
-        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
-            width="100%">
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered text-center"
+            cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th width="5%">No.</th>
-                    <th width="50%">Province Name</th>
-                    <th width=" 45%">Action</th>
+                    <th width="5%" class="text-center">No.</th>
+                    <th width="50%" class="text-center">Province Name</th>
+                    <th width=" 45%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,5 +56,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $provinces->links() }}
 </x-card-content>
 @endsection

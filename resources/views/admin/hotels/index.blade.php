@@ -14,18 +14,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="city_id">City</label>
-                    <select name="city_id" id="city_id" required
-                        class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
+                    <select name="city_id" id="city_id" required class="form-control">
                         <option value=""></option>
                         @foreach ($cities as $city)
                         <option value="{{ $city->id_city }}">{{ ucfirst($city->name) }}</option>
                         @endforeach
                     </select>
-                    <p class="text-danger">{{ $errors->first('city_id') }}</p>
                 </div>
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="City Name">
+                    <input name="name" type="text" class="form-control" placeholder="City Name">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -36,14 +33,15 @@
 
 <x-card-content title="City List" subtitle="Data to Store City List">
     <div class="table-responsive m-t-40">
-        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
-            width="100%">
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered text-center"
+            cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th width="5%">No.</th>
-                    <th width="25%">City </th>
-                    <th width="50%">Name Hotel</th>
-                    <th width=" 45%">Action</th>
+                    <th width="5%" class="text-center">No.</th>
+                    <th width="10%" class="text-center">City </th>
+                    <th width="10%" class="text-center">Name Hotel</th>
+                    <th width="15%" class="text-center">Address</th>
+                    <th width="10%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,11 +50,12 @@
                     <td>{{ ++$no }}</td>
                     <td>{{ $hotel->city['name'] }}</td>
                     <td>{{ $hotel->name }}</td>
+                    <td>{{ $hotel->address }}</td>
                     <td>
-                        <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
+                        <form action="{{ route('admin.hotels.destroy', $hotel->slug) }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotels->slug )">
+                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotel->slug )">
                                 Edit
                             </x-a-button>
                             <x-button type="danger" field="Delete" />
@@ -70,5 +69,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $hotels->links() }}
 </x-card-content>
 @endsection
