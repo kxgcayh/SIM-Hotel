@@ -10,11 +10,23 @@
                 @role('admin')
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false">
-                        <i class="mdi mdi-google-maps"></i><span class="hide-menu"> Data Location</span>
+                        <i class="mdi mdi-clipboard-account"></i><span class="hide-menu"> Management Accounts</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{ route('admin.provinces.index') }}"><i class="mdi mdi-map"></i> Province</a></li>
-                        <li><a href="{{ route('admin.cities.index') }}"><i class="mdi mdi-city"></i> City</a></li>
+                        <li><a href="{{ route('admin.users.index') }}"><i class="mdi mdi-account"></i> Data User</a>
+                        </li>
+                        <li><a href="#"><i class="mdi mdi-account-key"></i> Data Level</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="mdi mdi-google-maps"></i><span class="hide-menu"> Management Location</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('admin.provinces.index') }}"><i class="mdi mdi-map-marker-radius"></i>
+                                Data Province</a>
+                        </li>
+                        <li><a href="{{ route('admin.cities.index') }}"><i class="mdi mdi-city"></i> Data City</a></li>
                     </ul>
                 </li>
                 <li>
