@@ -48,9 +48,6 @@
                     <td>
                         <form action="{{ route('admin.users.destroy', $user->id_user) }}" method="POST">
                             @csrf
-                            <x-a-button class="info" :href="route('admin.users.show', $user->id_user)">
-                                <i class="fa fa-eye"></i>
-                            </x-a-button>
                             <x-a-button class="warning" :href="route('admin.users.edit', $user->id_user)">
                                 <i class="fa fa-edit"></i>
                             </x-a-button>

@@ -1,13 +1,13 @@
-@extends('layouts.mtpro', (['title' => 'Create User']))
+@extends('layouts.mtpro', (['title' => 'Edit User']))
 
 @section('content')
 
 {{-- Bread crumb and right sidebar toggle --}}
-<x-bread-crumb title="Create User">
+<x-bread-crumb title="Edit User">
     <x-bc-item field="Home" />
     <x-bc-item field="Management Account" />
     <x-bc-item field="Users" />
-    <x-bc-item-active field="Create" />
+    <x-bc-item-active field="Edit" />
     <x-slot name="button">
         <x-a-button class="info" :href="route('admin.users.index')">
             Back
