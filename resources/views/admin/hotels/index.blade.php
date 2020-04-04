@@ -13,22 +13,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="city_id">City</label>
-                    <select name="city_id" id="city_id" required
-                        class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
+                    <select name="city_id" id="city_id" required class="form-control">
                         <option value=""></option>
                         @foreach ($cities as $city)
                         <option value="{{ $city->id_city }}">{{ ucfirst($city->name) }}</option>
                         @endforeach
                     </select>
-                    <p class="text-danger">{{ $errors->first('city_id') }}</p>
                 </div>
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="Hotel Name">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}" rows=" 5"
-                        name="address" id="address" placeholder="Address"></textarea>
+                    <input name="name" type="text" class="form-control" placeholder="City Name">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -39,15 +32,15 @@
 
 <x-card-content title="Hotel List" subtitle="Data to Hotel City List">
     <div class="table-responsive m-t-40">
-        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
-            width="100%">
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered text-center"
+            cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th width="5%">No.</th>
-                    <th width="10%">City </th>
-                    <th width="10%">Hotel Name</th>
-                    <th width="15%">Address</th>
-                    <th width="10%">Action</th>
+                    <th width="5%" class="text-center">No.</th>
+                    <th width="10%" class="text-center">City </th>
+                    <th width="10%" class="text-center">Name Hotel</th>
+                    <th width="15%" class="text-center">Address</th>
+                    <th width="10%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>

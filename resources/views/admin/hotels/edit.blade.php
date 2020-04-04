@@ -60,8 +60,7 @@
             @method('PUT')
             <div class="form-group">
                 <label for="city_id">City</label>
-                <select name="city_id" id="city_id" required
-                    class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
+                <select name="city_id" id="city_id" class="form-control">
                     <option value=""></option>
                     @foreach ($cities as $city)
                     <option value="{{ $city->id_city }}" {{ $city->id_city == $hotel->city_id ? 'selected':'' }}>
@@ -69,14 +68,13 @@
                     </option>
                     @endforeach
                 </select>
-                <p class="text-danger">{{ $errors->first('city_id') }}</p>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Hotel Name" name="name" value="{{ $hotel->name }}">
             </div>
             <div class="form-group">
-                <textarea class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}" rows=" 5" name="address"
-                    id="address" placeholder="Address">{{ $hotel->address }}</textarea>
+                <textarea class="form-control" rows=" 5" name="address" id="address"
+                    placeholder="Address">{{ $hotel->address }}</textarea>
             </div>
             <x-button type="primary pull-right" field="Submit" />
         </form>
