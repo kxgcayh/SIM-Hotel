@@ -65,10 +65,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">Data City is Empty</td>
+                    <td colspan="4" class="text-center">Data City is Empty</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+        {{ $cities->links() }}
 </x-card-content>
 @endsection

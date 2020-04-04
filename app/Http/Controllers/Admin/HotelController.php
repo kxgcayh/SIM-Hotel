@@ -11,11 +11,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class HotelController extends Controller
 {
 
-  function __construct()
-  {
-      $this->middleware('verified');
-  }
-
+    function __construct()
+    {
+        $this->middleware('verified');
+    }
 
     public function index()
     {
@@ -44,16 +43,15 @@ class HotelController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-          'city_id' => 'required', 'exists:ms_provinces,slug',
-          'name' => 'required', 'min:6',
-      ], [
-          'city_id.required' => 'Province is Required',
-          'name.required' => 'City Name is Required'
+          'city_id' => 'required', 'exists:tr_cities,slug',
+          'name' => 'required', 'min:6', 'string',
+          'address' => 'required', 'string',
       ]);
 
       $hotels = new Hotel;
       $hotels->city_id = $request->city_id;
       $hotels->name = $request->name;
+      $hotels->address = $request->address;
       $hotels->save();
 
       Alert::alert()->success('Succes', 'Data City Successfully Created');
@@ -77,11 +75,11 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-      $city = City::orderBy('name', 'ASC')->get();
-      $hotels = Hotel::with('city')->where('slug', $slug)->firstOrFail();
-      return view('admin.hotels.edit', compact('hotels', 'city'));
+      $cities = City::orderBy('name', 'ASC')->get();
+      $hotel = Hotel::with('city')->where('slug', $slug)->firstOrFail();
+      return view('admin.hotels.edit', compact('hotel', 'cities'));
     }
 
     /**
@@ -91,19 +89,18 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
       $request->validate([
-          'city_id' => 'required', 'exists:ms_provinces,slug',
-          'name' => 'required',
-      ], [
-          'city_id.required' => 'Province is Required',
-          'name.required' => 'Province name is required'
+          'city_id' => 'required', 'exists:tr_cities,slug',
+          'name' => 'required', 'string',
+          'address' => 'required', 'string',
       ]);
 
       $hotels = Hotel::where('slug', $slug)->firstOrFail();
       $hotels->city_id = $request->city_id;
       $hotels->name = $request->name;
+      $hotels->address = $request->address;
       $hotels->save();
 
       Alert::info('Update Data Success', 'Data City Updated Succssfully.');
@@ -116,7 +113,7 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
       $hotels = Hotel::where('slug', $slug)->firstOrFail();
       $hotels->delete();
