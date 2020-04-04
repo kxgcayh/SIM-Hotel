@@ -14,24 +14,29 @@ class HotelsTableSeeder extends Seeder
     {
         Hotel::create([
             'city_id' => 1,
-            'name' => 'Hotel Anggrek',
+            'name' => 'Anggrek',
+            'address' => 'Jl. Raya Anggrek Merah'
         ]);
         Hotel::create([
-            'city_id' => 1,
-            'name' => 'Hotel Gumati',
+            'city_id' => 2,
+            'name' => 'Gumati',
+            'address' => 'Jl. Gumati No. 14'
         ]);
         Hotel::create([
-            'city_id' => 1,
-            'name' => 'Hotel Melati',
+            'city_id' => 3,
+            'name' => 'Melati',
+            'address' => 'Jl. Melati Hitam 20'
         ]);
         Hotel::create([
-            'city_id' => 1,
-            'name' => 'Hotel Indonesia Kempinski ',
+            'city_id' => 4,
+            'name' => 'Indonesia Kempinski ',
+            'address' => 'Jl. Kempinskuy'
         ]);
 
         Hotel::create([
-            'city_id' => 1,
-            'name' => 'Hotel Jakarta',
+            'city_id' => 5,
+            'name' => 'Sarinah',
+            'address' => 'Jl. Sari Bernanah'
         ]);
 
 

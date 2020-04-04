@@ -44,6 +44,7 @@ class CreateSystemInformationManagementTable extends Migration
         Schema::create('ms_room_facilities', function (Blueprint $table) {
             $table->bigIncrements('id_facility');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
 
@@ -52,6 +53,7 @@ class CreateSystemInformationManagementTable extends Migration
             $table->bigIncrements('id_room_type');
             $table->foreignId('facility_id');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
 

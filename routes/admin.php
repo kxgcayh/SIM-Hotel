@@ -12,6 +12,7 @@
 */
 
 Route::prefix('admin')->name('admin.')->group(function () {
+
     // City
     Route::resource('cities', 'CityController')
         ->except('create')->parameters(['cities' => 'slug']);
@@ -23,6 +24,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Province
     Route::resource('provinces', 'ProvinceController')
         ->except(['create', 'show'])->parameters(['provinces' => 'slug']);
+
+    // Facility
+    Route::resource('facilities', 'FacilityController')
+        ->parameters(['facilities' => 'slug']);
+
+    // Room Type
+    Route::resource('roomtypes', 'RoomTypeControllerClass')
+        ->parameters(['roomtypes' => 'slug']);
 
     // Room
     Route::resource('rooms', 'RoomController')

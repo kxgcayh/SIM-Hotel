@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CityStoreRequest extends FormRequest
+class RoomTypeStoreRequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,7 +14,7 @@ class CityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'province_id' => 'required|exists:ms_provinces,id_province',
+            'facility_id' => 'required|exists:ms_room_facilities,id_facility',
             'name' => 'required|string|min:6'
         ];
     }
@@ -22,7 +22,7 @@ class CityStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'province_id.required' => 'Please select province!',
+            'facility_id.required' => 'Please select facility!',
             'name.required' => 'Name is required!'
         ];
     }
