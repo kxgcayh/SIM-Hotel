@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CityController extends Controller
-{    
+{
     function __construct()
     {
         $this->middleware('verified');
@@ -20,14 +20,14 @@ class CityController extends Controller
         $provinces = Province::orderBy('name', 'ASC')->get();
         $cities = City::with('province')->latest()->paginate(5);
         return view('admin.cities.index', compact('cities', 'provinces'))
-            ->with('no', (request()->input('page', 1) - 1) * 5);    
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
             'province_id' => 'required', 'exists:ms_provinces,slug',
-            'name' => 'required', 'min:6',            
+            'name' => 'required', 'min:6',
         ], [
             'province_id.required' => 'Province is Required',
             'name.required' => 'City Name is Required'
@@ -53,7 +53,7 @@ class CityController extends Controller
     {
         $request->validate([
             'province_id' => 'required', 'exists:ms_provinces,slug',
-            'name' => 'required',            
+            'name' => 'required',
         ], [
             'province_id.required' => 'Province is Required',
             'name.required' => 'Province name is required'

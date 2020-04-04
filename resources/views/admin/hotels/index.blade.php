@@ -17,8 +17,8 @@
                     <select name="city_id" id="city_id" required
                         class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
                         <option value=""></option>
-                        @foreach ($city as $city)
-                        <option value="{{ $city->city_id }}">{{ ucfirst($city->name) }}</option>
+                        @foreach ($cities as $city)
+                        <option value="{{ $city->id_city }}">{{ ucfirst($city->name) }}</option>
                         @endforeach
                     </select>
                     <p class="text-danger">{{ $errors->first('city_id') }}</p>
@@ -47,11 +47,11 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($hotels $h)
+                @forelse ($hotels as $hotel)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ $h->city['name'] }}</td>
-                    <td>{{ $h->name }}</td>
+                    <td>{{ $hotel->city['name'] }}</td>
+                    <td>{{ $hotel->name }}</td>
                     <td>
                         <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
                             @csrf

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Hotel;
 use App\Models\City;
 use App\Http\Controllers\Controller;
@@ -18,9 +19,9 @@ class HotelController extends Controller
 
     public function index()
     {
-      $city = City::orderBy('name', 'ASC')->get();
+      $cities = City::orderBy('name', 'ASC')->get();
       $hotels = Hotel::with('city')->latest()->paginate(5);
-      return view('admin.hotels.index', compact('hotels', 'city'))
+      return view('admin.hotels.index', compact('hotels', 'cities'))
           ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
