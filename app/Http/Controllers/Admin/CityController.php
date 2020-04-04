@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
 use App\Models\Province;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\CityStoreRequest;
 
 class CityController extends Controller
 {
@@ -20,25 +20,16 @@ class CityController extends Controller
         $provinces = Province::orderBy('name', 'ASC')->get();
         $cities = City::with('province')->latest()->paginate(5);
         return view('admin.cities.index', compact('cities', 'provinces'))
-            ->with('no', (request()->input('page', 1) - 1) * 5);
+            ->with('no', (request()->input('page', 1) - 1) *5);
     }
 
-    public function store(Request $request)
+    public function store(CityStoreRequest $request)
     {
-        $request->validate([
-            'province_id' => 'required', 'exists:ms_provinces,slug',
-            'name' => 'required', 'min:6',
-        ], [
-            'province_id.required' => 'Province is Required',
-            'name.required' => 'City Name is Required'
-        ]);
-
         $city = new City;
         $city->province_id = $request->province_id;
         $city->name = $request->name;
         $city->save();
-
-        Alert::alert()->success('Succes', 'Data City Successfully Created');
+        alert('Success','Create Data City Successfully', 'success');
         return redirect()->route('admin.cities.index');
     }
 
@@ -49,16 +40,8 @@ class CityController extends Controller
         return view('admin.cities.edit', compact('city', 'provinces'));
     }
 
-    public function update(Request $request, $slug)
+    public function update(CityStoreRequest $request, $slug)
     {
-        $request->validate([
-            'province_id' => 'required', 'exists:ms_provinces,slug',
-            'name' => 'required',
-        ], [
-            'province_id.required' => 'Province is Required',
-            'name.required' => 'Province name is required'
-        ]);
-
         $city = City::where('slug', $slug)->firstOrFail();
         $city->province_id = $request->province_id;
         $city->name = $request->name;

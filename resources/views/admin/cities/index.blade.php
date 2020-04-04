@@ -15,17 +15,22 @@
                 <div class="form-group">
                     <label for="province_id">Province</label>
                     <select name="province_id" id="province_id" required
-                        class="form-control {{ $errors->has('province_id') ? 'is-invalid':'' }}">
+                        class="form-control @error('province_id') is-invalid @enderror">
                         <option value=""></option>
                         @foreach ($provinces as $province)
                         <option value="{{ $province->id_province }}">{{ ucfirst($province->name) }}</option>
                         @endforeach
                     </select>
+                    @error('province_id')
                     <p class="text-danger">{{ $errors->first('province_id') }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
+                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
                         placeholder="City Name">
+                    @error('name')
+                    <p class="text-danger">{{ $errors->first('name') }}</p>
+                    @enderror
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -36,14 +41,14 @@
 
 <x-card-content title="City List" subtitle="Data to Store City List">
     <div class="table-responsive m-t-40">
-        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
-            width="100%">
+        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered text-center"
+            cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th width="5%">No.</th>
-                    <th width="25%">Province</th>
-                    <th width="50%">City Name</th>
-                    <th width=" 45%">Action</th>
+                    <th width="5%" class="text-center">No.</th>
+                    <th width="25%" class="text-center">Province</th>
+                    <th width="50%" class="text-center">City Name</th>
+                    <th width=" 45%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,10 +70,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">Data City is Empty</td>
+                    <td colspan="4" class="text-center">Data City is Empty</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+        {{ $cities->links() }}
 </x-card-content>
 @endsection
