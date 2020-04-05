@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\City;
 use App\Models\Room;
+use App\Models\RoomFacility;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Hotel extends Model
+class RoomType extends Model
 {
     use Sluggable;
 
-    protected $table = 'tr_hotels';
+    protected $table = 'tr_room_types';
 
-    protected $primaryKey = 'id_hotel';
+    protected $primaryKey = 'id_room_type';
 
     protected $fillable = [
-        'city_id', 'name', 'slug',
+        'facility_id', 'name', 'slug',
     ];
 
     public function sluggable()
@@ -28,9 +28,9 @@ class Hotel extends Model
         ];
     }
 
-    public function city()
+    public function facility()
     {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(RoomFacility::class, 'facility_id');
     }
 
     public function rooms()

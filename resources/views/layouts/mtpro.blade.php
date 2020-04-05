@@ -16,21 +16,17 @@
 <body class="fix-header fix-sidebar card-no-border logo-center">
     {{-- Preloader - style you can find in spinners.css --}}
     @preloader
-
     {{-- Main wrapper - style you can find in pages.scss --}}
     <div id="main-wrapper">
         {{-- Topbar header - style you can find in pages.scss --}}
         @header
         {{-- End Topbar header --}}
-
         {{-- Left Sidebar - style you can find in sidebar.scss  --}}
         @leftSidebar
         {{-- End Left Sidebar - style you can find in sidebar.scss  --}}
-
         {{-- Sweet Alert --}}
         @include('sweetalert::alert')
         {{-- End of Sweet Alert --}}
-
         {{-- Page wrapper  --}}
         <div class="page-wrapper">
             {{-- Container fluid  --}}
@@ -38,13 +34,11 @@
                 {{-- Start Page Content --}}
                 @yield('content')
                 {{-- End PAge Content --}}
-
                 {{-- Service Panel --}}
                 @servicePanel
                 {{-- End Service Panel --}}
             </div>
             {{-- End Container fluid  --}}
-
             {{-- Footer --}}
             @footer
             {{-- End Footer --}}
@@ -52,7 +46,6 @@
         {{-- End Page wrapper  --}}
     </div>
     {{-- End Wrapper --}}
-
     {{-- Footer Script --}}
     @footerScript
     {{-- End of Footer Script --}}

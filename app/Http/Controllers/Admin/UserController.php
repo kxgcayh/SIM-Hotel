@@ -1,98 +1,92 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
-use DataTables;
+use DB;
+use Hash;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Spatie\Permission\Models\Role;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    function __construct()
     {
-        if ($request->ajax()) {
-            $data = User::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-     
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-      
-        return view('admin.users.index');
+        $this->middleware('verified');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function index()
+    {
+        $data = User::orderBy('id_user', 'DESC')->paginate(5);
+        return view('admin.users.index', compact('data'))
+            ->with('no', (request()->input('page', 1) - 1)* 5);
+    }
+
+
     public function create()
     {
-        //
+        $levels = Role::orderBy('name', 'ASC')->get();
+        return view('admin.users.create', compact('levels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(UserStoreRequest $request)
     {
-        //
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show($id_user)
     {
-        //
+        $user = User::find($id_user);
+        return view('admin.users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($id_user)
     {
-        //
+        $user = User::find($id_user);
+        $roles= Role::orderBy('name', 'ASC')->get();
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(UserUpdateRequest $request, $id_user)
     {
-        //
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = array_except($input, array('password'));
+        }
+
+        $user = User::find($id_user);
+        $user->update($input);
+        DB::table('tr_user_has_levels')->where('model_id', $id_user)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy($id_user)
     {
-        //
+        User::find($id_user)->delete();
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deleted successfully');
     }
-
 }

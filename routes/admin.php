@@ -11,23 +11,35 @@
 |
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {    
+Route::prefix('admin')->name('admin.')->group(function () {
+
     // City
     Route::resource('cities', 'CityController')
         ->except('create')->parameters(['cities' => 'slug']);
+
     // Hotel
     Route::resource('hotels', 'HotelController')
-        ->except('create')->parameters(['hotels' => 'slug']);
+        ->except('create', 'show')->parameters(['hotels' => 'slug']);
+
     // Province
     Route::resource('provinces', 'ProvinceController')
-        ->except(['create', 'show'])->parameters(['provinces' => 'slug']);    
+        ->except(['create', 'show'])->parameters(['provinces' => 'slug']);
+
+    // Facility
+    Route::resource('facilities', 'FacilityController')
+        ->parameters(['facilities' => 'slug']);
+
+    // Room Type
+    Route::resource('roomtypes', 'RoomTypeController')
+        ->parameters(['roomtypes' => 'slug']);
+
     // Room
     Route::resource('rooms', 'RoomController')
         ->parameters(['rooms' => 'slug']);
+
     // User
-    Route::resource('users', 'UserController')
-        ->parameters(['users' => 'slug']);
-        
+    Route::resource('users', 'UserController')->except('show');
+
     // Level
     Route::resource('levels', 'LevelController');
 });
