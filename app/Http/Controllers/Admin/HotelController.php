@@ -43,11 +43,11 @@ class HotelController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-          'city_id' => 'required', 'exists:ms_provinces,slug',
+          'city_id' => 'required', 'exists:tr_cities,slug',
           'name' => 'required', 'min:6',
       ], [
-          'city_id.required' => 'Province is Required',
-          'name.required' => 'City Name is Required'
+          'city_id.required' => 'City is Required',
+          'name.required' => 'Hotek Name is Required'
       ]);
 
       $hotels = new Hotel;
@@ -55,7 +55,7 @@ class HotelController extends Controller
       $hotels->name = $request->name;
       $hotels->save();
 
-      Alert::alert()->success('Succes', 'Data City Successfully Created');
+      Alert::alert()->success('Succes', 'Data Hotel Successfully Created');
       return redirect()->route('admin.hotels.index');
     }
 

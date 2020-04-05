@@ -3,13 +3,13 @@
 @section('content')
 
 {{-- Bread crumb and right sidebar toggle --}}
-<x-bread-crumb title="Data Cities">
+<x-bread-crumb title="Data Hotel">
     <x-bc-item field="Home" />
     <x-bc-item field="Data Location" />
-    <x-bc-item-active field="Cities" />
+    <x-bc-item-active field="Hotel" />
     <x-slot name="button">
         <x-modal-button id="create" class="primary" icon="mdi mdi-plus" name="Create" />
-        <x-modal id="create" class="primary" title="Create City Data">
+        <x-modal id="create" class="primary" title="Create Hotel Data">
             <form role="form" action="{{ route('admin.hotels.store') }}" method="POST" class="form-material">
                 @csrf
                 <div class="form-group">
@@ -34,9 +34,9 @@
 </x-bread-crumb>
 {{-- End Bread crumb and right sidebar toggle --}}
 
-<x-card-content title="City List" subtitle="Data to Store City List">
+<x-card-content title="Hotel List" subtitle="Data to Store Hotel List">
     <div class="table-responsive m-t-40">
-        <table id="province-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
+        <table id="citis-table" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
             width="100%">
             <thead>
                 <tr>
@@ -47,11 +47,11 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($hotels $h)
+                @forelse ($hotels as $hotels)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ $h->city['name'] }}</td>
-                    <td>{{ $h->name }}</td>
+                    <td>{{ $hotels->city['name'] }}</td>
+                    <td>{{ $hotels->name }}</td>
                     <td>
                         <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
                             @csrf
