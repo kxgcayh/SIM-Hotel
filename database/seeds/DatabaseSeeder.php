@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
             LevelsAndAccessSeeder::class,
             ProvincesTableSeeder::class,
             CitiesTableSeeder::class,
-            HotelsTableSeeder::class
+            HotelsTableSeeder::class,
+            FacilitiesTableSeeder::class,
+            TypesTableSeeder::class,
+            TypeFacilitySeeder::class
         ]);
     }
 }

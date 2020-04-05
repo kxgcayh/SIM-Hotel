@@ -11,12 +11,12 @@ class RoomType extends Model
 {
     use Sluggable;
 
-    protected $table = 'tr_room_types';
+    protected $table = 'ms_types';
 
-    protected $primaryKey = 'id_room_type';
+    protected $primaryKey = 'id_type';
 
     protected $fillable = [
-        'facility_id', 'name', 'slug',
+        'name', 'slug',
     ];
 
     public function sluggable()
@@ -28,13 +28,16 @@ class RoomType extends Model
         ];
     }
 
-    public function facility()
-    {
-        return $this->belongsTo(RoomFacility::class, 'facility_id');
-    }
-
     public function rooms()
     {
         return $this->hasMany(Room::class);
+    }
+
+    // Many to Many Relationship
+    public function facilities()
+    {
+        return $this->belongsToMany(
+            RoomFacility::class, 'tr_type_has_facility', 'type_id', 'facility_id'
+        );
     }
 }
