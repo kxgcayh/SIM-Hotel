@@ -17,7 +17,7 @@
                     <select name="city_id" id="city_id" required
                         class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
                         <option value=""></option>
-                        @foreach ($city as $city)
+                        @foreach ($citys as $city)
                         <option value="{{ $city->city_id }}">{{ ucfirst($city->name) }}</option>
                         @endforeach
                     </select>
@@ -25,7 +25,11 @@
                 </div>
                 <div class="form-group">
                     <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="City Name">
+                        placeholder=" Name Hotel">
+                </div>
+                <div class="form-group">
+                    <textarea name="address" type="text" class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}"
+                        placeholder="  address"></textarea>
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -42,21 +46,23 @@
                 <tr>
                     <th width="5%">No.</th>
                     <th width="25%">City </th>
-                    <th width="50%">Name Hotel</th>
+                    <th width="25%">Name Hotel</th>
+                      <th width="25%">Address</th>
                     <th width=" 45%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($hotels as $hotels)
+                @forelse ($hotels as $hotel)
                 <tr>
                     <td>{{ ++$no }}</td>
-                    <td>{{ $hotels->city['name'] }}</td>
-                    <td>{{ $hotels->name }}</td>
+                    <td>{{ $hotel->city['name'] }}</td>
+                    <td>{{ $hotel->name }}</td>
+                        <td>{{ $hotel->address }}</td>
                     <td>
-                        <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
+                        <form action="{{ route('admin.hotels.destroy', $hotel->slug) }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotels->slug )">
+                            <x-a-button class="warning" :href="route('admin.hotels.edit', $hotel->slug )">
                                 Edit
                             </x-a-button>
                             <x-button type="danger" field="Delete" />
