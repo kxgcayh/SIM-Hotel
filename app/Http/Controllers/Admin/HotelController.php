@@ -18,9 +18,9 @@ class HotelController extends Controller
 
     public function index()
     {
-      $city = City::orderBy('name', 'ASC')->get();
+      $cities = City::orderBy('name', 'ASC')->get();
       $hotels = Hotel::with('city')->latest()->paginate(5);
-      return view('admin.hotels.index', compact('hotels', 'city'))
+      return view('admin.hotels.index', compact('hotels', 'cities'))
           ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -43,13 +43,9 @@ class HotelController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-          'city_id' => 'required', 'exists:tr_cities,slug',
-          'name' => 'required', 'min:6',
-          'address' => 'required',
-      ], [
-          'city_id.required' => 'City is Required',
-          'name.required' => 'Hotel Name is Required',
-          'address.required' => 'Address is Required'
+            'city_id' => 'required', 'exists:tr_cities,slug',
+            'name' => 'required', 'min:6', 'string',
+            'address' => 'required', 'string',
       ]);
 
       $hotels = new Hotel;
@@ -79,11 +75,11 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-      $city = City::orderBy('name', 'ASC')->get();
-      $hotels = Hotel::with('city')->where('slug', $slug)->firstOrFail();
-      return view('admin.hotels.edit', compact('hotels', 'city'));
+      $cities = City::orderBy('name', 'ASC')->get();
+      $hotel = Hotel::with('city')->where('slug', $slug)->firstOrFail();
+    return view('admin.hotels.edit', compact('hotel', 'cities'));
     }
 
     /**
@@ -97,8 +93,8 @@ class HotelController extends Controller
     {
       $request->validate([
           'city_id' => 'required', 'exists:tr_cities,slug',
-          'address' => 'required',
-          'name' => 'required',
+          'address' => 'required','string',
+          'name' => 'required','string',
       ], [
           'city_id.required' => 'City is Required',
           'name.required' => 'Hotel name is required',
@@ -121,7 +117,7 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
       $hotels = Hotel::where('slug', $slug)->firstOrFail();
       $hotels->delete();

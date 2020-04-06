@@ -17,8 +17,8 @@
                     <select name="city_id" id="city_id" required
                         class="form-control {{ $errors->has('city_id') ? 'is-invalid':'' }}">
                         <option value=""></option>
-                        @foreach ($citys as $city)
-                        <option value="{{ $city->city_id }}">{{ ucfirst($city->name) }}</option>
+                        @foreach ($cities as $city)
+                        <option value="{{ $city->id_city }}">{{ ucfirst($city->name) }}</option>
                         @endforeach
                     </select>
                     <p class="text-danger">{{ $errors->first('city_id') }}</p>
@@ -28,9 +28,9 @@
                         placeholder=" Name Hotel">
                 </div>
                 <div class="form-group">
-                    <textarea name="address" type="text" class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}"
-                        placeholder="  address"></textarea>
-                </div>
+                      <textarea class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}" rows=" 5"
+                          name="address" id="address" placeholder="Address"></textarea>
+                  </div>
                 <x-button type="primary" field="Submit" />
             </form>
         </x-modal>
@@ -44,11 +44,11 @@
             width="100%">
             <thead>
                 <tr>
-                    <th width="5%">No.</th>
-                    <th width="25%">City </th>
-                    <th width="25%">Name Hotel</th>
-                      <th width="25%">Address</th>
-                    <th width=" 45%">Action</th>
+                        <th width="5%">No.</th>
+                        <th width="10%">City </th>
+                      <th width="10%">Hotel Name</th>
+                      <th width="15%">Address</th>
+                      <th width="10%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +57,8 @@
                     <td>{{ ++$no }}</td>
                     <td>{{ $hotel->city['name'] }}</td>
                     <td>{{ $hotel->name }}</td>
-                        <td>{{ $hotel->address }}</td>
+                    <td>{{ $hotel->address }}</td>
+
                     <td>
                         <form action="{{ route('admin.hotels.destroy', $hotel->slug) }}" method="POST">
                             @csrf
@@ -71,10 +72,11 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">Data Hotel is Empty</td>
+                    <td colspan="4" class="text-center">Data Hotel is Empty</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
+           {{ $hotels->links() }}
 </x-card-content>
 @endsection
