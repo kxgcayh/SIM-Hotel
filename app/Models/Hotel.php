@@ -14,9 +14,9 @@ class Hotel extends Model
     protected $table = 'tr_hotels';
 
     protected $primaryKey = 'id_hotel';
-    
+
     protected $fillable = [
-        'city_id', 'name', 'slug',
+        'city_id', 'name', 'slug','address'
     ];
 
     public function sluggable()

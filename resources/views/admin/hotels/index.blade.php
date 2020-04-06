@@ -25,7 +25,11 @@
                 </div>
                 <div class="form-group">
                     <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
-                        placeholder="City Name">
+                        placeholder=" Name Hotel">
+                </div>
+                <div class="form-group">
+                    <input name="address" type="text" class="form-control {{ $errors->has('address') ? 'is-invalid':'' }}"
+                        placeholder="  address">
                 </div>
                 <x-button type="primary" field="Submit" />
             </form>
@@ -42,7 +46,8 @@
                 <tr>
                     <th width="5%">No.</th>
                     <th width="25%">City </th>
-                    <th width="50%">Name Hotel</th>
+                    <th width="25%">Name Hotel</th>
+                      <th width="25%">Address</th>
                     <th width=" 45%">Action</th>
                 </tr>
             </thead>
@@ -52,6 +57,7 @@
                     <td>{{ ++$no }}</td>
                     <td>{{ $hotels->city['name'] }}</td>
                     <td>{{ $hotels->name }}</td>
+                        <td>{{ $hotels->address }}</td>
                     <td>
                         <form action="{{ route('admin.hotels.destroy', $hotels->slug) }}" method="POST">
                             @csrf
