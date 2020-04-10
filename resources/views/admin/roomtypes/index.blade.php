@@ -47,7 +47,15 @@
                 @forelse ($types as $type)
                 <tr>
                     <td>{{ ++$no }}.</td>
-                    <td>{{ $type->facility['name'] }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($type->facilities as $row)
+                            <li>
+                                {{ $row->name }}
+                            </li>
+                            @endforeach
+                        </ul>
+                    </td>
                     <td>{{ $type->name }}</td>
                     <td>
                         <form action="{{ route('admin.cities.destroy', $type->slug) }}" method="POST">

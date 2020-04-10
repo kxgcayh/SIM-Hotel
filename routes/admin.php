@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->parameters(['facilities' => 'slug']);
 
     // Room Type
-    Route::resource('roomtypes', 'RoomTypeControllerClass')
+    Route::resource('roomtypes', 'RoomTypeController')
         ->parameters(['roomtypes' => 'slug']);
 
     // Room
