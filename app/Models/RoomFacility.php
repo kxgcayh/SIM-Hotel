@@ -10,7 +10,7 @@ class RoomFacility extends Model
 {
     use Sluggable;
 
-    protected $table = 'ms_room_facilities';
+    protected $table = 'ms_facilities';
 
     protected $primaryKey = 'id_facility';
 
@@ -27,8 +27,11 @@ class RoomFacility extends Model
         ];
     }
 
-    public function roomtypes()
+    // Many to Many Relationship
+    public function types()
     {
-        return $this->hasMany(RoomType::class);
+        return $this->belongsToMany(
+            RoomType::class, 'tr_type_has_facility', 'facility_id', 'type_id'
+        );
     }
 }

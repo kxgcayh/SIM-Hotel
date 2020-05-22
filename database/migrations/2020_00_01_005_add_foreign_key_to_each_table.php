@@ -23,16 +23,11 @@ class AddForeignKeyToEachTable extends Migration
                 ->on('tr_cities')->onDelete('cascade');
         });
 
-        Schema::table('tr_room_types', function (Blueprint $table) {
-            $table->foreign('facility_id')->references('id_facility')
-                ->on('ms_room_facilities')->onDelete('cascade');
-        });
-
         Schema::table('tr_rooms', function (Blueprint $table) {
             $table->foreign('hotel_id')->references('id_hotel')
                 ->on('tr_hotels')->onDelete('cascade');
-            $table->foreign('room_type_id')->references('id_room_type')
-                ->on('tr_room_types')->onDelete('cascade');
+            $table->foreign('type_id')->references('id_type')
+                ->on('ms_types')->onDelete('cascade');
         });
 
         Schema::table('tr_reservations', function (Blueprint $table) {

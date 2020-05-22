@@ -18,9 +18,9 @@ class RoomTypeController extends Controller
     public function index()
     {
         $facilities = Facility::orderBy('name', 'ASC')->get();
-        $types = Type::with('facility')->latest()->paginate(5);
+        $types = Type::orderBy('name')->paginate(5);
         return view('admin.roomtypes.index', compact('facilities', 'types'))
-            ->with('no', (request()->input('page', 1) - 1) *5);
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -38,7 +38,7 @@ class RoomTypeController extends Controller
     public function edit($slug)
     {
         $facility = Facility::orderBy('name', 'ASC')->get();
-        $type = Type::with('facility')->where('slug', $slug)->firstOrFail();
+        $type = Type::where('slug', $slug)->firstOrFail();
         return view('admin.roomtypes.edit', compact('facility', 'type'));
     }
 

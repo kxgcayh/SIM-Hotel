@@ -41,7 +41,7 @@ class CreateSystemInformationManagementTable extends Migration
         });
 
         // Room Facility Table
-        Schema::create('ms_room_facilities', function (Blueprint $table) {
+        Schema::create('ms_facilities', function (Blueprint $table) {
             $table->bigIncrements('id_facility');
             $table->string('name');
             $table->string('slug');
@@ -49,9 +49,8 @@ class CreateSystemInformationManagementTable extends Migration
         });
 
         // Room Type Table
-        Schema::create('tr_room_types', function (Blueprint $table) {
-            $table->bigIncrements('id_room_type');
-            $table->foreignId('facility_id');
+        Schema::create('ms_types', function (Blueprint $table) {
+            $table->bigIncrements('id_type');
             $table->string('name');
             $table->string('slug');
             $table->timestamps();
@@ -61,7 +60,7 @@ class CreateSystemInformationManagementTable extends Migration
         Schema::create('tr_rooms', function (Blueprint $table) {
             $table->bigIncrements('id_room');
             $table->foreignId('hotel_id');
-            $table->foreignId('room_type_id');
+            $table->foreignId('type_id');
             $table->string('name');
             $table->string('slug');
             $table->bigInteger('price');
